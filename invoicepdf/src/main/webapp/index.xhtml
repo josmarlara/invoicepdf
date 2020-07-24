@@ -1,0 +1,139 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+     
+    <h:head>
+    <title>Invoice</title>
+     
+    </h:head>
+ 
+    <h:body>
+    
+   <p:layout style="min-width:100px;min-height:600px">
+   
+   <p:layoutUnit position="center">
+   
+   
+   
+   
+   
+   <h1>Service Invoice</h1>
+   
+    
+   
+<p:panel header="Generar Factura">
+
+<h:form>
+<h:panelGrid columns="6" cellpadding="5">
+<h:outputLabel value="Cantidad:" for="cantidad" />
+<p:inputText id="cantidad" value="#{facturaBean.cantidad}" required="true" label="Cantidad" size="10" requiredMessage="Cantidad Obligatorio">
+</p:inputText>
+<p:message for="cantidad"></p:message>
+ <p:outputLabel for="fechaServicio" value="Fecha del Servicio:" />
+        <p:calendar id="fechaServicio" value="#{facturaBean.fechaServicio}" showOn="button"  pattern="yyyy-MM-dd" locale="es">
+         
+         </p:calendar>
+<p:message for="fechaServicio"></p:message>
+<h:outputLabel value="Concepto:" for="concepto" />
+<p:inputText id="concepto" value="#{facturaBean.concepto}" label="Concepto" size="40" >
+</p:inputText>
+<p:message for="concepto"></p:message>
+<h:outputLabel value="Precio Unitario:" for="precioUnitario" />
+<p:inputText id="precioUnitario" value="#{facturaBean.precioUnitario}" required="true" label="PrecioUnitario" size="40" requiredMessage="Precio Unitario Obligatorio">
+</p:inputText>
+<p:message for="precioUnitario"></p:message>
+<h:outputLabel value="Descuento:" for="descuento" />
+<p:inputText id="descuento" value="#{facturaBean.descuento}" required="true" label="Descuento" size="40" requiredMessage="Precio Unitario Obligatorio">
+</p:inputText>
+<p:message for="descuento"></p:message>
+<p:commandButton  value="Agregar Concepto"  action="#{facturaBean.agregarConcepto}"   update="conceptos,cantidad,concepto,precioUnitario,subtotal,
+impuestoMunicipal,impuestoEstatal,descuento,fechaServicio,impuestoTotal,totalFactura">
+                  </p:commandButton>
+
+<p:commandButton action="#{facturaBean.imprimir}" value="Generar Factura"
+                        icon="icon-report" ajax="false">
+                  </p:commandButton>
+                  
+                  
+ <p:commandButton  value="Limpiar Factura"  action="#{facturaBean.limpiarFactura()}"   update="conceptos,subtotal,
+impuestoMunicipal,impuestoEstatal,impuestoTotal,totalFactura">
+                  </p:commandButton>                 
+                  
+</h:panelGrid>
+
+<p:dataTable  lazy="true" dynamic="true"
+id="conceptos"  var="factura"  value="#{facturaBean.conceptos}" editable="true" style="margin-bottom:20px">
+<f:facet name="header">
+
+Conceptos
+</f:facet>
+
+
+
+
+
+<p:column headerText="Cantidad">
+
+<h:outputText value="#{factura.cantidad}" />
+</p:column>
+<p:column headerText="Fecha Servicio">
+<h:outputText value="#{factura.fechaServicio}" />
+</p:column>
+<p:column headerText="Concepto">
+<h:outputText value="#{factura.concepto}" />
+</p:column>
+<p:column headerText="Precio Unitario">
+
+<h:outputText value="#{factura.precioUnitario}" />
+</p:column>
+<p:column headerText="Descuento">
+<h:outputText value="#{factura.descuento}" />
+</p:column>
+<p:column headerText="Total">
+
+<h:outputText value="#{factura.total}" />
+
+</p:column>
+
+
+</p:dataTable>
+<h:panelGrid columns="2" cellpadding="5">
+<h:outputLabel value="Subtotal:" for="subtotal" />
+<p:inputText id="subtotal" value="#{facturaBean.subTotal}"   size="10">
+</p:inputText>
+<h:outputLabel value="Impuesto municipal 1%:" for="impuestoMunicipal" />
+<p:inputText id="impuestoMunicipal" value="#{facturaBean.impuestoMunicipal}"   size="10">
+</p:inputText>
+<h:outputLabel value="Impuesto Estatal 10.50%:" for="impuestoEstatal" />
+<p:inputText id="impuestoEstatal" value="#{facturaBean.impuestoEstatal}"   size="10">
+</p:inputText>
+<h:outputLabel value="Impuesto Total:" for="impuestoTotal" />
+<p:inputText id="impuestoTotal" value="#{facturaBean.impuestoTotal}"   size="10">
+</p:inputText>
+<h:outputLabel value="Total Factura:" for="totalFactura" />
+<p:inputText id="totalFactura" value="#{facturaBean.totalFactura}"   size="10">
+</p:inputText>
+
+</h:panelGrid>
+
+</h:form>
+</p:panel>
+
+
+</p:layoutUnit>
+</p:layout>
+
+
+
+
+
+     
+     
+     
+        
+  
+ 
+    
+    </h:body>
+</html>
